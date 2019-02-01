@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Carrossel</title>
+  <style type="text/css">
+    #banners h2 {
+      font-size: 12px;
+      text-align: center;
+    }
+    #banners .container {
+      height: 95px;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+    }
+    #banners .container a {
+      display: block;
+      left: calc(50% - 150px);
+      height: 95px;
+      position: absolute;
+      transform: translateY(-95px);
+      width: 300px;
+      will-change: transform;
+    }
+    #banners .container a.active {
+      transform: translateY(0);
+      transition: all 0.5s ease-in-out;
+    }
+    #banners .container a.leaving {
+      transform: translateY(95px);
+      transition: all 0.5s ease-in-out;
+    }
+  </style>
+  
+	<script type="text/javascript">
+	{
+		/* Animação dos Banners */
+		let banners = document.querySelectorAll('#banners .container a');
+		setInterval(function() {
+			let current = 0;
+			let next = 0
+			for (let b of banners) {
+				if (b.classList.contains('active')) {
+					break;
+				}
+				current++;
+			}
+			next = current + 1;
+			if (next == banners.length) {
+				next = 0;
+			}
+			banners[current].classList.replace('active', 'leaving');
+			banners[next].classList.remove('leaving');
+			setTimeout(function(){
+				banners[next].classList.add('active');
+			}, 1);
+		}, 3000);
+	}
+  </script>
+</head>
+<body>
+<div id="banners">
+	<h2>Patrocínio / Apoio</h2>
+	<div class="container">
+			<a href="#" class="active" style="background-color:#f00;">
+			  <!--<img src="img1.jpg" />-->
+			</a>
+			<a href="#" style="background-color:#008cff;">
+			  <!--<img src="img2.jpg" />-->
+			</a>
+			<a href="#" style="background-color:#2aff00;">
+			  <!--<img src="img3.jpg" />-->
+			</a>
+	</div>
+</div>
+</body>
+</html>
